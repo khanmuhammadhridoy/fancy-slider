@@ -31,9 +31,6 @@ const showImages = (images) => {
 const getImages = (query) => {
   fetch(`https://pixabay.com/api/?key=${KEY}=${query}&image_type=photo&pretty=true`)
     .then(response => response.json())
-
-    // .then(data => console.log(data))
-
     .then(data => showImages(data.hits))
     .catch(err => console.log(err))
 }
@@ -112,6 +109,22 @@ const changeSlide = (index) => {
   items[index].style.display = "block"
 }
 
+// Enter Key function Added for search
+document.getElementById("search")
+  .addEventListener("keypress", function (event) {
+    if (event.key === "Enter") {
+      searchBtn.click();
+    }
+  });
+
+document.getElementById("duration")
+  .addEventListener("keypress", function (event) {
+    if (event.key === "Enter") {
+      sliderBtn.click();
+    }
+  });
+
+// Enter Key function Added for slider
 searchBtn.addEventListener('click', function () {
   document.querySelector('.main').style.display = 'none';
   clearInterval(timer);
