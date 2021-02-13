@@ -38,15 +38,18 @@ const getImages = (query) => {
 let slideIndex = 0;
 const selectItem = (event, img) => {
   let element = event.target;
-  element.classList.add('added');
-
+  element.classList.toggle('added');
   let item = sliders.indexOf(img);
   if (item === -1) {
     sliders.push(img);
   } else {
-    alert('Hey, Already added !')
+    const index = sliders.indexOf(img);
+    if (index > -1) {
+      sliders.splice(index, 1);
+    }
   }
 }
+
 var timer
 const createSlider = () => {
   // check slider image length
@@ -90,7 +93,6 @@ const changeItem = index => {
 
 // change slide item
 const changeSlide = (index) => {
-
   const items = document.querySelectorAll('.slider-item');
   if (index < 0) {
     slideIndex = items.length - 1
@@ -117,6 +119,7 @@ document.getElementById("search")
     }
   });
 
+// Enter Key function Added for slider
 document.getElementById("duration")
   .addEventListener("keypress", function (event) {
     if (event.key === "Enter") {
@@ -124,7 +127,6 @@ document.getElementById("duration")
     }
   });
 
-// Enter Key function Added for slider
 searchBtn.addEventListener('click', function () {
   document.querySelector('.main').style.display = 'none';
   clearInterval(timer);
