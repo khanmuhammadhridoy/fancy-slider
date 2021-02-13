@@ -25,7 +25,7 @@ const showImages = (images) => {
     div.innerHTML = ` <img class="img-fluid img-thumbnail" onclick=selectItem(event,"${image.webformatURL}") src="${image.webformatURL}" alt="${image.tags}">`;
     gallery.appendChild(div)
   })
-
+  toggleSpinner();
 }
 
 const getImages = (query) => {
@@ -68,7 +68,7 @@ const createSlider = () => {
 
   sliderContainer.appendChild(prevNext)
   document.querySelector('.main').style.display = 'block';
-  // hide image aria
+  // hide image area
   imagesArea.style.display = 'none';
   const duration = Math.abs(document.getElementById('duration').value) || 1000;
   sliders.forEach(slide => {
@@ -133,8 +133,18 @@ searchBtn.addEventListener('click', function () {
   const search = document.getElementById('search');
   getImages(search.value)
   sliders.length = 0;
+  document.getElementById('duration').value = "";
+  toggleSpinner();
 })
 
 sliderBtn.addEventListener('click', function () {
   createSlider()
 })
+
+// loadingSpinner function
+const toggleSpinner = () => {
+  const spinner = document.getElementById("loadingSpinner")
+  const images = document.getElementById("images")
+  spinner.classList.toggle("invisible");
+  images.classList.toggle("invisible");
+}
